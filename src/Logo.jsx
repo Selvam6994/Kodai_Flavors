@@ -1,0 +1,1 @@
+export const pageLogo = "https://res.cloudinary.com/dommwbnzh/image/upload/v1701331579/samples/ecommerce/Logo/Kodai-Logo_dpx9ms.png"

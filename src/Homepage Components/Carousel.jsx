@@ -51,7 +51,7 @@ const nextButton = { position: "absolute", right: "50px", top: "50%" };
 const varients = {
   initial: (direction) => {
     return {
-      x: direction > 0 ? 200 : -200,
+      x: direction > 0 ? 500 : -500,
       opacity: 0,
     };
   },
@@ -61,7 +61,7 @@ const varients = {
   },
   exit: (direction) => {
     return {
-      x: direction < 0 ? -200 : 200,
+      x: direction < 0 ? -500 : 500,
       opacity: 0,
     };
   },
@@ -70,7 +70,7 @@ const varients = {
 const Carousel = () => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-
+  const [autoScroll, setAutoScroll] = useState(true);
   const prevSlide = () => {
     setDirection(-1);
     if (index == 0) {
@@ -89,12 +89,22 @@ const Carousel = () => {
     }
   };
 
+  document.addEventListener("scroll", () => {
+    if (window.scrollY >= 150) {
+      setAutoScroll(false);
+    } else {
+      setAutoScroll(true);
+    }
+  });
+
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      nextSlide();
+      if (autoScroll) {
+        nextSlide();
+      }
     }, 5000);
     return () => clearInterval(slideInterval);
-  }, [index]);
+  }, [index, autoScroll]);
 
   return (
     <div className="carouselContainer">
@@ -116,6 +126,8 @@ const Carousel = () => {
             custom={direction}
           />
         </AnimatePresence>
+
+        {/* <img className="slider" src={images[index].image}alt="" /> */}
         <IconButton
           aria-label="prevButton"
           className="prevButton"

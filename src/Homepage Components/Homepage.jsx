@@ -1,12 +1,14 @@
 import React from "react";
 import Carousel from "./Carousel";
-import Navbar from "./Navbar";
+import Popular_Products from "./Popular_Products";
+import Categories from "./Categories";
 
 const Homepage = () => {
   return (
-    <div className="homePage">
-        <Navbar/>
+    <div className="homePage"> 
       <Carousel />
+      <Popular_Products />
+      <Categories />
     </div>
   );
 };

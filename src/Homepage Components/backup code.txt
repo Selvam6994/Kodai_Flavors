@@ -10,3 +10,88 @@
             <SearchIcon />
             {searchField? <></>:""}
           </motion.div>
+
+
+          Popular product card
+         {popularProducts.map((product, index) => (
+          <Paper
+            sx={{ borderRadius: "20px" }}
+            className="productCard"
+            elevation={4}
+            key={index}
+          >
+            <div className="cardImage">
+              <img src={product.image} alt={product.name} />
+            </div>
+            <Paper
+              elevation={4}
+              className="cardContent"
+              sx={{ borderRadius: "20px" }}
+            >
+              <div className="cardTitleContainer">
+                <span>{product.name}</span>
+              </div>
+              {/* <div className="cardRatingContainer">
+                {product.rating >= 4.5 ? (
+                  <>
+                    <StarIcon sx={ratingColor} />
+                    {product.rating}
+                  </>
+                ) : (
+                  <>
+                    <StarHalfIcon sx={ratingColor} />
+                    {product.rating}
+                  </>
+                )}
+              </div> */}
+              <div className="qtyPriceContainer">
+                {product.hasOldPrice ? (
+                  <div className="priceTag">
+                    Rs.<span>{product.oldPrice}</span>
+                    <span>{product.price}/Kg</span>
+                  </div>
+                ) : (
+                  <>Rs.{product.price}/Kg</>
+                )}
+              </div>
+              <div className="purchaseContainer">
+                {productQty && productName == product.name ? (
+                  <div>
+                    <IconButton
+                      onClick={() => {
+                        document.cookie = "sdhf=sflh";
+                      }}
+                    >
+                      <RemoveIcon sx={{ color: "red" }} />
+                    </IconButton>
+                    {qty}
+                    <IconButton
+                      onClick={() => {
+                        document.cookie = "name=selva";
+                      }}
+                    >
+                      <AddIcon sx={{ color: "green" }} />
+                    </IconButton>
+                    Kg
+                  </div>
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => {
+                      setProductName(product.name);
+                      popularProducts.map((item) => {
+                        if (productName == item.name) {
+                          localStorage.setItem(`${product.name}`, `${item}`);
+                        }
+                      });
+                    }}
+                  >
+                    <AddShoppingCartIcon color="white" />
+                    Add to cart
+                  </Button>
+                )}
+              </div>
+            </Paper>
+          </Paper>
+        ))}
