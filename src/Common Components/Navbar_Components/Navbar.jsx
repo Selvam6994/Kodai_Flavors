@@ -9,15 +9,19 @@ import {
 import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
-import { pageLogo } from "../Logo";
+import { pageLogo } from "../../Logo";
 import Navbuttons from "./Navbuttons";
-import { tabMenu } from "./Data/NavbarOptions";
+import { tabMenu } from "../../Data/NavbarOptions";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import MenuIcon from "@mui/icons-material/Menu";
+import { tabWidth } from "../../Media_Query/Tabview";
+import { smallMobileWidth } from "../../Media_Query/Mobileview";
+
 const Navbar = () => {
-  const tabView = useMediaQuery("(min-width:1020px)");
+  const tabView = useMediaQuery(`(${tabWidth})`);
+  const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
   return (
     <div className="navBarContainer">
       <Paper
@@ -44,7 +48,7 @@ const Navbar = () => {
             </div>
           </>
         ) : (
-          <div className="tabViewMenuContainer">
+          <div className="tabViewMenuContainer" style={smallMobileView?{gap:"50px"}:{width:"10%"}}>
             <IconButton color="primary" aria-label="add to shopping cart">
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartIcon />
@@ -57,8 +61,8 @@ const Navbar = () => {
                     <MenuIcon />
                   </IconButton>
                   <Menu {...bindMenu(popupState)}>
-                    {tabMenu.map((option) => (
-                      <MenuItem onClick={popupState.close}>
+                    {tabMenu.map((option, index) => (
+                      <MenuItem onClick={popupState.close} key={index}>
                         {option.option}
                       </MenuItem>
                     ))}

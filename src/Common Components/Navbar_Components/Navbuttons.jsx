@@ -1,5 +1,5 @@
 import React from "react";
-import { navButtons } from "./Data/NavbarOptions";
+import { navButtons } from "../../Data/NavbarOptions";
 import { motion } from "framer-motion";
 const Navbuttons = () => {
   return (

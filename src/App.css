@@ -33,14 +33,12 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-
-
 }
 
 .logoContainer {
   width: 100px;
   height: 100px;
-  padding: 0 30px 0 30px;
+  padding: 0 10px 0 10px;
 }
 
 .logoContainer img {
@@ -71,13 +69,15 @@
   align-items: center;
   justify-content: space-evenly;
 }
-.tabViewMenuContainer{
+
+.tabViewMenuContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:50px;
   padding: 0 30px 0 30px;
 }
+
+
 
 /*Carousel Component Properties */
 .carouselContainer {
@@ -106,14 +106,12 @@
 
 .captionContainer {
   position: absolute;
-  min-width: 280px;
-  max-width: 800px;
-}
-
-.slideCaption {
-  font-size: 35px;
-  font-weight: bolder;
-  color: aliceblue;
+  width: 60%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*Popular Products Component Properties */

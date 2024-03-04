@@ -1,5 +1,5 @@
 import React from "react";
-import Carousel from "./Carousel";
+import Carousel from "./Carousel_Component/Carousel";
 import Popular_Products from "./Popular_Products";
 import Categories from "./Categories";
 
