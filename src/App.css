@@ -323,3 +323,28 @@
   justify-content: center;
   gap: 2rem;
 }
+
+/* Products page properties */
+.productsPage{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.productCategory{
+  margin-top: 140px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.productsCardContainer{
+  width: 80%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 20px 0 20px 0;
+}

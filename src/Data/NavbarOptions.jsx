@@ -1,45 +1,38 @@
 export const navButtons = [
     {
-      option: "Chocolates",
+      option: "Home",
       linkTo: "",
     },
     {
-      option: "Coffee",
+      option: "Product Categories",
       linkTo: "",
     },
     {
-      option: "Fruits",
+      option: "About Us",
       linkTo: "",
     },
     {
-      option: "Honey",
+      option: "Contact",
       linkTo: "",
     },
-    {
-      option: "Spices",
-      linkTo: "",
-    },
+   
   ];
 
   export const tabMenu = [
     {
-      option: "Chocolates",
+      option: "Home",
       linkTo: "",
     },
     {
-      option: "Coffee",
+      option: "Product Categories",
       linkTo: "",
     },
     {
-      option: "Fruits",
+      option: "About Us",
       linkTo: "",
     },
     {
-      option: "Honey",
-      linkTo: "",
-    },
-    {
-      option: "Spices",
+      option: "Contact",
       linkTo: "",
     },
     {
