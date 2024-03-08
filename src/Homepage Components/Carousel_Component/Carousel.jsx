@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { carouselContent } from "../../Data/CarouselData";
 import Carousel_Caption from "./Carousel_Caption";
 import { MobileWidth } from "../../Media_Query/Mobileview";
-
+import "../Carousel_Component/Carousel_Component.css"
 // Carousel Button Properties
 const prevButton = { position: "absolute", left: "20px", top: "50%" };
 const nextButton = { position: "absolute", right: "20px", top: "50%" };

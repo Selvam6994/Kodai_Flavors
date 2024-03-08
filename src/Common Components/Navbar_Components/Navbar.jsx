@@ -11,14 +11,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import { pageLogo } from "../../Logo";
 import Navbuttons from "./Navbuttons";
-import { tabMenu } from "../../Data/NavbarOptions";
+import { tabMenu } from "./NavbarOptions";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import MenuIcon from "@mui/icons-material/Menu";
 import { tabWidth } from "../../Media_Query/Tabview";
 import { smallMobileWidth } from "../../Media_Query/Mobileview";
-
+import "../Navbar_Components/Navbar.css"
 const Navbar = () => {
   const tabView = useMediaQuery(`(${tabWidth})`);
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);

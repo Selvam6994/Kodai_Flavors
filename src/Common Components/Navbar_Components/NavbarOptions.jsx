@@ -1,19 +1,19 @@
-export const navButtons = [
+export const navOptions = [
     {
       option: "Home",
-      linkTo: "",
+      link: "/",
     },
     {
       option: "Product Categories",
-      linkTo: "",
+      link: "categories",
     },
     {
       option: "About Us",
-      linkTo: "",
+      link: "about",
     },
     {
       option: "Contact",
-      linkTo: "",
+      link: "contact",
     },
    
   ];
@@ -21,22 +21,22 @@ export const navButtons = [
   export const tabMenu = [
     {
       option: "Home",
-      linkTo: "",
+      link: "/",
     },
     {
       option: "Product Categories",
-      linkTo: "",
+      link: "categories",
     },
     {
       option: "About Us",
-      linkTo: "",
+      link: "about",
     },
     {
       option: "Contact",
-      linkTo: "",
+      link: "contact",
     },
     {
       option: "Search",
-      linkTo: "",
+      link: "",
     },
   ];

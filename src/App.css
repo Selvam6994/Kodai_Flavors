@@ -6,256 +6,10 @@
   font-family: Roboto;
 }
 
-/* Home Page Properties */
-.homePage {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 50px;
-}
-
-/* Nav Bar Component Properties */
-.navBarContainer {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  z-index: 1;
-}
-
-.navBar {
-  width: 90%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.logoContainer {
-  width: 100px;
-  height: 100px;
-  padding: 0 10px 0 10px;
-}
-
-.logoContainer img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.buttonsContainer {
-  width: 50%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.navButtons {
-  list-style: none;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.optionsContainer {
-  width: 400px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.tabViewMenuContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 30px 0 30px;
-}
 
 
 
-/*Carousel Component Properties */
-.carouselContainer {
-  margin-top: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-  height: fit-content;
-}
 
-.sliderContainer {
-  width: 100%;
-  height: 50vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.slider {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  position: relative;
-}
-
-.captionContainer {
-  position: absolute;
-  width: 60%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/*Popular Products Component Properties */
-.popularProductsPage {
-  width: 85%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.popularProductTitleSection {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.popularProductCardsection {
-  width: 95%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
-  overflow: hidden;
-  padding: 50px 10px 50px 10px;
-}
-
-.productCard {
-  min-width: 280px;
-  max-width: 280px;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.cardSlider {
-  display: flex;
-  gap: 1rem;
-  cursor: grab;
-  width: 100%;
-}
-
-.cardImage {
-  width: 100%;
-  height: 55%;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-  pointer-events: none;
-}
-
-.cardImage img {
-  width: inherit;
-  height: 100%;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-  object-fit: cover;
-}
-
-.cardContent {
-  width: 100%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  position: absolute;
-  bottom: 0;
-}
-
-.cardTitleContainer,
-.cardRatingContainer {
-  width: 90%;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cardTitleContainer span {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.qtyPriceContainer,
-.purchaseContainer {
-  width: 90%;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.priceTag span:nth-child(1) {
-  text-decoration: line-through;
-}
-
-/* Produvt Categories Section */
-.productCategoriesSection {
-  width: 90%;
-  height: fit-content;
-}
-
-.categoriesTitleSection {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.categoriesCardSection {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 2rem;
-  padding: 20px 0 20px 0;
-}
-
-.categoriesCard {
-  width: 200px;
-  height: 320px;
-  cursor: pointer;
-}
-
-.categoriesCard img {
-  width: inherit;
-  height: inherit;
-  object-fit: cover;
-  color: rgba(0, 0, 0, 0.103);
-  border-radius: 50px;
-}
 
 /* footer section properties */
 .footerSection {
@@ -325,7 +79,7 @@
 }
 
 /* Products page properties */
-.productsPage{
+.productsPage {
   width: 100%;
   height: fit-content;
   display: flex;
@@ -333,12 +87,12 @@
   justify-content: center;
   flex-direction: column;
 }
-.productCategory{
+.productCategory {
   margin-top: 140px;
   font-size: 30px;
   font-weight: bold;
 }
-.productsCardContainer{
+.productsCardContainer {
   width: 80%;
   height: fit-content;
   display: flex;
@@ -348,3 +102,122 @@
   gap: 50px;
   padding: 20px 0 20px 0;
 }
+
+/* View product Page */
+/* .productPage {
+  border: 2px solid;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.productImageDetailsContainer {
+  border: 2px solid;
+  width: 90%;
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 150px;
+  padding-bottom: 50px;
+}
+.imageContainer {
+  border: 2px solid green;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imageCard {
+  width: 90%;
+  height: 90%;
+}
+.imageCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.productDetailsContainer {
+  border: 2px solid green;
+  width: 30%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.productDetailsContaner {
+  width: 100%;
+  height: fit-content;
+}
+.productDescription {
+  border: 2px solid;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.productName {
+  font-size: 20px;
+  font-weight: bold;
+}
+.productType {
+  font-size: 20px;
+}
+
+.priceQtySection {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.productPrice {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+.productQty {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.purchaseOptionContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.descriptionContainer {
+  border: 2px solid;
+  width: 90%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefitsContainer {
+  border: 2px solid;
+  width: 90%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.benefitsContainer span {
+  font-size: 15px;
+  font-weight: bold;
+} */

@@ -95,3 +95,51 @@
             </Paper>
           </Paper>
         ))}
+
+        View product backup code
+         <div className="productImageDetailsContainer">
+        <div className="imageContainer">
+          <Paper
+            elevation={4}
+            className="imageCard"
+            sx={{ borderRadius: "20px" }}
+          >
+            <img src={product.image} alt="" />
+          </Paper>
+        </div>
+        <div className="productDetailsContainer">
+          <div className="productDetailsContaner">
+            <div className="productDescription">
+              <span className="productName">{product.name}</span>
+              <span className="productType">{product.category}</span>
+            </div>
+          </div>
+          <div className="priceQtySection">
+            <span className="productPrice">
+              MRP : <CurrencyRupeeIcon sx={{ fontSize: "20px" }} />
+              {product.price}/-
+            </span>
+            <span className="productQty">
+              Quantity:<IconButton>+</IconButton>
+              {product.quantity}
+              <IconButton>-</IconButton>
+            </span>
+          </div>
+          <div className="purchaseOptionContainer">
+            <Button variant="contained" color="success">
+              Order Now!
+            </Button>
+            <Button variant="contained">
+              <AddShoppingCartIcon />
+              Add to Cart
+            </Button>
+          </div>
+          <div className="descriptionContainer">
+            <p>{product.description}</p>
+          </div>
+          <div className="benefitsContainer">
+            <span>Benefits</span>
+            <p>{product.benefits}</p>
+          </div>
+        </div>
+      </div>
