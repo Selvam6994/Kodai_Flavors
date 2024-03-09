@@ -6,7 +6,7 @@ import {
   TextField,
   useMediaQuery,
 } from "@mui/material";
-import React from "react";
+import React, { useContext, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import { pageLogo } from "../../Logo";
@@ -18,10 +18,19 @@ import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import MenuIcon from "@mui/icons-material/Menu";
 import { tabWidth } from "../../Media_Query/Tabview";
 import { smallMobileWidth } from "../../Media_Query/Mobileview";
-import "../Navbar_Components/Navbar.css"
+import "../Navbar_Components/Navbar.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { AddCartContext } from "../../App";
 const Navbar = () => {
+
   const tabView = useMediaQuery(`(${tabWidth})`);
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
+  const navigate = useNavigate();
+  const {itemsData}=useContext(AddCartContext)
+const[cartItems]=itemsData
+
+
   return (
     <div className="navBarContainer">
       <Paper
@@ -36,8 +45,12 @@ const Navbar = () => {
           <>
             <Navbuttons />{" "}
             <div className="optionsContainer">
-              <IconButton color="primary" aria-label="add to shopping cart">
-                <Badge badgeContent={4} color="primary">
+              <IconButton
+                color="primary"
+                aria-label="add to shopping cart"
+                onClick={() => navigate("/myCart")}
+              >
+                <Badge badgeContent={cartItems.length} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
@@ -48,9 +61,16 @@ const Navbar = () => {
             </div>
           </>
         ) : (
-          <div className="tabViewMenuContainer" style={smallMobileView?{gap:"50px"}:{width:"10%"}}>
-            <IconButton color="primary" aria-label="add to shopping cart">
-              <Badge badgeContent={4} color="primary">
+          <div
+            className="tabViewMenuContainer"
+            style={smallMobileView ? { gap: "50px" } : { width: "10%" }}
+          >
+            <IconButton
+              color="primary"
+              aria-label="add to shopping cart"
+              onClick={() => navigate("/myCart")}
+            >
+              <Badge badgeContent={cartItems.length} color="primary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

@@ -56,7 +56,7 @@ const ViewProduct = () => {
               Qty:
               <IconButton>+</IconButton>
               {product.quantity}
-              <IconButton>-</IconButton>
+              <IconButton>-</IconButton>Kg
             </div>
           </div>
           <div className="productPurchasebuttonSection">
