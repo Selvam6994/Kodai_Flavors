@@ -12,25 +12,15 @@ const Popular_Products = () => {
   // state management
   const [sliderWidth, setSliderWidth] = useState(0);
 
-  const { name, qty, itemsData } = useContext(AddCartContext);
+  const { name, qty, cartData } = useContext(AddCartContext);
 
   const [productName, setProductName] = name;
   const [productQuantity, setProductQty] = qty;
-  const [cartItems, setCartItems] = itemsData;
+  const [getCartData] = cartData;
   const slider = useRef();
-
-  const getCartData = () => {
-    const cartData = [];
-    let keys = Object.keys(localStorage);
-    for (let i = 0; i < keys.length; i++) {
-      cartData.push(JSON.parse(localStorage.getItem(keys[i])));
-      setCartItems([...cartData]);
-    }
-  };
 
   useEffect(() => {
     setSliderWidth(slider.current.scrollWidth - slider.current.offsetWidth);
-    getCartData();
   }, []);
 
   const addProduct = (product, productQuantity) => {

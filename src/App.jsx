@@ -16,12 +16,23 @@ const App = () => {
   const [cartItems, setCartItems] = useState([]);
 
 
+  
+  const getCartData = () => {
+    const cartData = [];
+    let keys = Object.keys(localStorage);
+    for (let i = 0; i < keys.length; i++) {
+      cartData.push(JSON.parse(localStorage.getItem(keys[i])));
+      setCartItems([...cartData]);
+    }
+  };
+
   return (
     <AddCartContext.Provider
       value={{
         name: [productName, setProductName],
         qty: [productQuantity, setProductQty],
         itemsData: [cartItems, setCartItems],
+        cartData:[getCartData]
       }}
     >
       <Navbar />
@@ -34,7 +45,6 @@ const App = () => {
         ></Route>
         <Route path="/mycart" element={<Cart />}></Route>
       </Routes>
-
       <Footer />
     </AddCartContext.Provider>
   );

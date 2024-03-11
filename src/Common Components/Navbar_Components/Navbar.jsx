@@ -23,14 +23,16 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AddCartContext } from "../../App";
 const Navbar = () => {
-
   const tabView = useMediaQuery(`(${tabWidth})`);
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
   const navigate = useNavigate();
-  const {itemsData}=useContext(AddCartContext)
-const[cartItems]=itemsData
+  const { itemsData,cartData } = useContext(AddCartContext);
+  const [cartItems] = itemsData;
+const[getCartData]=cartData
 
-
+  useEffect(() => {
+    getCartData();
+  }, []);
   return (
     <div className="navBarContainer">
       <Paper
