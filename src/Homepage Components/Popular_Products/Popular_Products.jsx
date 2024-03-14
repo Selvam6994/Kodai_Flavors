@@ -7,40 +7,26 @@ import { motion } from "framer-motion";
 import { popularProducts } from "../../Data/PopularProducts";
 import "../Popular_Products/Popular_Products.css";
 import { AddCartContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const Popular_Products = () => {
+  const navigate = useNavigate();
   // state management
   const [sliderWidth, setSliderWidth] = useState(0);
 
-  const { name, qty, cartData } = useContext(AddCartContext);
+  const { name, qty, addCartItem, addQty, minusQty } =
+    useContext(AddCartContext);
+  const [productName] = name;
+  const [productQuantity] = qty;
+  const [addItem] = addCartItem;
+  const [increaseQty] = addQty;
+  const [decreaseQty] = minusQty;
 
-  const [productName, setProductName] = name;
-  const [productQuantity, setProductQty] = qty;
-  const [getCartData] = cartData;
   const slider = useRef();
 
   useEffect(() => {
     setSliderWidth(slider.current.scrollWidth - slider.current.offsetWidth);
   }, []);
-
-  const addProduct = (product, productQuantity) => {
-    const productQty = { name: product.name, qty: productQuantity };
-    localStorage.setItem(product.name, JSON.stringify(productQty));
-    setProductQty(1);
-    getCartData();
-  };
-
-  const increaseQty = (product) => {
-    setProductName(product.name);
-    setProductQty(productQuantity + 1);
-  };
-
-  const decreaseQty = (product) => {
-    setProductName(product.name);
-    if (productQuantity > 1) {
-      setProductQty(productQuantity - 1);
-    }
-  };
 
   return (
     <div className="popularProductsPage">
@@ -83,20 +69,31 @@ const Popular_Products = () => {
                     <>Rs.{product.price}/Kg</>
                   )}
                 </div>
-                <div className="qtyContainer">
-                  <IconButton onClick={() => increaseQty(product)}>
-                    +
-                  </IconButton>
-                  {product.name == productName ? productQuantity : 1}
-                  <IconButton onClick={() => decreaseQty(product)}>
-                    -
-                  </IconButton>
+                <div className="viewProduct">
+                  <Button
+                    color="warning"
+                    onClick={() =>
+                      navigate(`category/${product.category}/${product.name}`)
+                    }
+                  >
+                    View
+                  </Button>
                 </div>
+               
                 <div className="purchaseContainer">
+                  <div>
+                    <IconButton onClick={() => increaseQty(product)}>
+                      +
+                    </IconButton>
+                    {product.name == productName ? productQuantity : 1}
+                    <IconButton onClick={() => decreaseQty(product)}>
+                      -
+                    </IconButton>
+                  </div>
                   <Button
                     variant="contained"
                     color="success"
-                    onClick={() => addProduct(product, productQuantity)}
+                    onClick={() => addItem(product, productQuantity)}
                   >
                     <AddShoppingCartIcon color="white" />
                     Add to cart

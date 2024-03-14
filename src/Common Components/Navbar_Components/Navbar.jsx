@@ -26,9 +26,9 @@ const Navbar = () => {
   const tabView = useMediaQuery(`(${tabWidth})`);
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
   const navigate = useNavigate();
-  const { itemsData,cartData } = useContext(AddCartContext);
+  const { itemsData, cartItemData } = useContext(AddCartContext);
   const [cartItems] = itemsData;
-const[getCartData]=cartData
+  const [getCartData] = cartItemData;
 
   useEffect(() => {
     getCartData();

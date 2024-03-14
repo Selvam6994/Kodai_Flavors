@@ -14,15 +14,52 @@ const App = () => {
   const [productName, setProductName] = useState({});
   const [productQuantity, setProductQty] = useState(1);
   const [cartItems, setCartItems] = useState([]);
-
-
-  
+  const [item, setItem] = useState([]);
+  // Get cart item
   const getCartData = () => {
     const cartData = [];
     let keys = Object.keys(localStorage);
     for (let i = 0; i < keys.length; i++) {
       cartData.push(JSON.parse(localStorage.getItem(keys[i])));
       setCartItems([...cartData]);
+    }
+  };
+  // Add cart item
+  const addItem = (product, productQuantity) => {
+    const productQty = {
+      name: product.name,
+      qty: productQuantity,
+      category: product.category,
+      price: product.price,
+      img: product.image,
+    };
+    localStorage.setItem(product.name, JSON.stringify(productQty));
+    setProductQty(1);
+    getCartData();
+  };
+  // remove cart item
+  const removeItem = (item) => {
+    const cartProducts = cartItems.filter(
+      (product) => product.name !== item.name
+    );
+    localStorage.removeItem(item.name);
+    setItem(cartProducts);
+    if (cartProducts.length == 0 && Object.keys(localStorage).length == 0) {
+      cartItems.length = 0;
+    }
+  };
+
+  // increase cart item qty
+  const increaseQty = (product) => {
+    setProductName(product.name);
+    setProductQty(productQuantity + 1);
+  };
+
+  // decrease cart item qty
+  const decreaseQty = (product) => {
+    setProductName(product.name);
+    if (productQuantity > 1) {
+      setProductQty(productQuantity - 1);
     }
   };
 
@@ -32,7 +69,12 @@ const App = () => {
         name: [productName, setProductName],
         qty: [productQuantity, setProductQty],
         itemsData: [cartItems, setCartItems],
-        cartData:[getCartData]
+        cartItemData: [getCartData],
+        addCartItem: [addItem],
+        remvoveCartItem: [removeItem],
+        cartItemRemove: [item],
+        addQty: [increaseQty],
+        minusQty: [decreaseQty],
       }}
     >
       <Navbar />
