@@ -95,7 +95,7 @@ const Cart = () => {
                     <span>{item.name}</span>
                   </div>
                   <div className={!mobView ? "mobQtyPrice" : "qtyPrice"}>
-                    <span>Quantity:{item.qty}</span>
+                    <span>Quantity:{item.qty}Kg</span>
                     <span>
                       Price:
                       <CurrencyRupeeIcon />
@@ -128,16 +128,16 @@ const Cart = () => {
             </div>
             <div className="subTotal">
               <span>Sub-total</span>
-              <span>{cartItemSubTotal()}</span>
+              <span><CurrencyRupeeIcon/>{cartItemSubTotal()}/-</span>
             </div>
             <div className="shipping">
               <span>Shipping</span>
-              <span>{shippingPrice()}</span>
+              <span><CurrencyRupeeIcon/>{shippingPrice()}/-</span>
             </div>
 
             <div className="total">
               <span>Total</span>
-              <span>{cartItemSubTotal() + shippingPrice()}</span>
+              <span><CurrencyRupeeIcon/>{cartItemSubTotal() + shippingPrice()}/-</span>
             </div>
             <Button variant="contained" color="success">
               Check out
