@@ -15,6 +15,8 @@ const App = () => {
   const [productQuantity, setProductQty] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [item, setItem] = useState([]);
+
+  
   // Get cart item
   const getCartData = () => {
     const cartData = [];
@@ -30,7 +32,7 @@ const App = () => {
       name: product.name,
       qty: productQuantity,
       category: product.category,
-      price: product.price,
+      price: productQuantity*product.price,
       img: product.image,
     };
     localStorage.setItem(product.name, JSON.stringify(productQty));
@@ -54,6 +56,8 @@ const App = () => {
     setProductName(product.name);
     setProductQty(productQuantity + 1);
   };
+
+
 
   // decrease cart item qty
   const decreaseQty = (product) => {
