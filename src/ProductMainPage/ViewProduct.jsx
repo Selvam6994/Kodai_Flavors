@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { productsData } from "../Data/ProductsData";
 import { Button, IconButton, Paper } from "@mui/material";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "../ProductMainPage/ViewProduct.css";
+import { AddCartContext } from "../App";
 
 const ViewProduct = () => {
-  const name = useParams();
-
+  const itemName = useParams();
+  const { qty, name, addQty, minusQty, addCartItem } =
+    useContext(AddCartContext);
+  const [productQuantity] = qty;
+  const [productName] = name;
+  const [increaseQty] = addQty;
+  const [decreaseQty] = minusQty;
+  const [addItem] = addCartItem;
   const [product] = productsData.filter(
-    (product) => name.product == product.name
+    (product) => itemName.product == product.name
   );
-  console.log(product);
+
   return (
     <div className="productPage">
       <div className="productContainer">
@@ -22,7 +29,7 @@ const ViewProduct = () => {
             className="imgCard"
             sx={{ borderRadius: "20px" }}
           >
-            <img src={product.image} alt="" />
+            <img src={product.image} alt={product.image} />
           </Paper>
         </div>
         <div className="productDetailsContainer">
@@ -54,16 +61,17 @@ const ViewProduct = () => {
             )}
             <div className="qtyContainer">
               Qty:
-              <IconButton>+</IconButton>
-              {product.quantity}
-              <IconButton>-</IconButton>Kg
+              <IconButton onClick={() => increaseQty(product)}>+</IconButton>
+              {product.name == productName ? productQuantity : 1}
+              <IconButton onClick={() => decreaseQty(product)}>-</IconButton>Kg
             </div>
           </div>
           <div className="productPurchasebuttonSection">
-            <Button variant="contained" color="success">
-              Buy Now
-            </Button>
-            <Button variant="contained" color="warning">
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => addItem(product, productQuantity)}
+            >
               <AddShoppingCartIcon />
               Add to Cart
             </Button>

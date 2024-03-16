@@ -80,8 +80,9 @@ const Cart = () => {
             <span className="emptyCartProducts">Cart is empty!</span>
           ) : (
             <div className={!mobView ? "mobCartProducts" : "cartProducts"}>
-              {cartItems.map((item) => (
+              {cartItems.map((item, index) => (
                 <Paper
+                  key={index}
                   className={
                     !mobView ? "mobCartProductCard" : "cartProductCard"
                   }
@@ -128,16 +129,25 @@ const Cart = () => {
             </div>
             <div className="subTotal">
               <span>Sub-total</span>
-              <span><CurrencyRupeeIcon/>{cartItemSubTotal()}/-</span>
+              <span>
+                <CurrencyRupeeIcon />
+                {cartItemSubTotal()}/-
+              </span>
             </div>
             <div className="shipping">
               <span>Shipping</span>
-              <span><CurrencyRupeeIcon/>{shippingPrice()}/-</span>
+              <span>
+                <CurrencyRupeeIcon />
+                {shippingPrice()}/-
+              </span>
             </div>
 
             <div className="total">
               <span>Total</span>
-              <span><CurrencyRupeeIcon/>{cartItemSubTotal() + shippingPrice()}/-</span>
+              <span>
+                <CurrencyRupeeIcon />
+                {cartItemSubTotal() + shippingPrice()}/-
+              </span>
             </div>
             <Button variant="contained" color="success">
               Check out
