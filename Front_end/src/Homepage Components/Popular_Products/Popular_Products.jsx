@@ -4,29 +4,34 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { motion } from "framer-motion";
-import { popularProducts } from "../../Data/PopularProducts";
 import "../Popular_Products/Popular_Products.css";
 import { AddCartContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
-const Popular_Products = () => {
+const Popular_Products = ({popular}) => {
   const navigate = useNavigate();
   // state management
   const [sliderWidth, setSliderWidth] = useState(0);
-
-  const { name, qty, addCartItem, addQty, minusQty } =
-    useContext(AddCartContext);
+console.log(popular);
+  const {
+    name,
+    qty,
+    addCartItem,
+    addQty,
+    minusQty,
+  } = useContext(AddCartContext);
   const [productName] = name;
   const [productQuantity] = qty;
   const [addItem] = addCartItem;
   const [increaseQty] = addQty;
   const [decreaseQty] = minusQty;
-
-  const slider = useRef();
-
+  let slider = useRef();
+console.log(slider.current);
   useEffect(() => {
+
     setSliderWidth(slider.current.scrollWidth - slider.current.offsetWidth);
   }, []);
+
 
   return (
     <div className="popularProductsPage">
@@ -39,7 +44,7 @@ const Popular_Products = () => {
           drag="x"
           dragConstraints={{ right: "0", left: -sliderWidth }}
         >
-          {popularProducts.map((product, index) => (
+          {popular.map((product, index) => (
             <Paper
               sx={{ borderRadius: "20px" }}
               className="productCard"
@@ -79,7 +84,7 @@ const Popular_Products = () => {
                     View
                   </Button>
                 </div>
-               
+
                 <div className="purchaseContainer">
                   <div>
                     <IconButton onClick={() => increaseQty(product)}>

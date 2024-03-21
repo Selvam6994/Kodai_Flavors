@@ -7,23 +7,22 @@ import Displayproducts from "./ProductsCardPage Components/Displayproducts";
 import ViewProduct from "./ProductMainPage/ViewProduct";
 import Cart from "./Cart Component/Cart";
 import { createContext, useEffect, useState } from "react";
+import { getProductData } from "./Data/Products";
 
 export const AddCartContext = createContext();
 
 const App = () => {
   const [productsData, setProductsData] = useState([]);
+
   const [productName, setProductName] = useState({});
   const [productQuantity, setProductQty] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [item, setItem] = useState([]);
 
   // get products data
-  const getProductData = async () => {
-    const response = await fetch("http://localhost:3000/api/get/product", {
-      method: "GET",
-    });
-    const jsonData = await response.json();
-    setProductsData(jsonData);
+  const getProducts = async () => {
+    const data = await getProductData();
+    setProductsData(data);
   };
 
   // Get cart item
@@ -75,7 +74,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    getProductData();
+    getProducts();
   }, []);
 
   return (
@@ -85,6 +84,7 @@ const App = () => {
         qty: [productQuantity, setProductQty],
         itemsData: [cartItems, setCartItems],
         productInfo: [productsData],
+
         cartItemData: [getCartData],
         addCartItem: [addItem],
         remvoveCartItem: [removeItem],
