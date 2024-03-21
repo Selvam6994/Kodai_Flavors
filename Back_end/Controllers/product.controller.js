@@ -28,7 +28,7 @@ export const findProducts = async (req, res) => {
       .collection("products")
       .find()
       .toArray();
-    res.status(200).send(product);
+    res.status(200).json(product);
   } catch (error) {
     res.status(500).send({ message: "Error:", error });
   }

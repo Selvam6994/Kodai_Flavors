@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { productsData } from "../Data/ProductsData";
 import { Button, IconButton, Paper } from "@mui/material";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -9,13 +8,15 @@ import { AddCartContext } from "../App";
 
 const ViewProduct = () => {
   const itemName = useParams();
-  const { qty, name, addQty, minusQty, addCartItem } =
+
+  const { qty, name, addQty, minusQty, addCartItem, productInfo } =
     useContext(AddCartContext);
   const [productQuantity] = qty;
   const [productName] = name;
   const [increaseQty] = addQty;
   const [decreaseQty] = minusQty;
   const [addItem] = addCartItem;
+  const [productsData] = productInfo;
   const [product] = productsData.filter(
     (product) => itemName.product == product.name
   );

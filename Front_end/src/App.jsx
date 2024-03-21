@@ -2,19 +2,29 @@ import "./App.css";
 import Footer from "./Common Components/Footer";
 import Navbar from "./Common Components/Navbar_Components/Navbar";
 import Homepage from "./Homepage Components/Homepage";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, json } from "react-router-dom";
 import Displayproducts from "./ProductsCardPage Components/Displayproducts";
 import ViewProduct from "./ProductMainPage/ViewProduct";
 import Cart from "./Cart Component/Cart";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AddCartContext = createContext();
 
 const App = () => {
+  const [productsData, setProductsData] = useState([]);
   const [productName, setProductName] = useState({});
   const [productQuantity, setProductQty] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [item, setItem] = useState([]);
+
+  // get products data
+  const getProductData = async () => {
+    const response = await fetch("http://localhost:3000/api/get/product", {
+      method: "GET",
+    });
+    const jsonData = await response.json();
+    setProductsData(jsonData);
+  };
 
   // Get cart item
   const getCartData = () => {
@@ -64,12 +74,17 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    getProductData();
+  }, []);
+
   return (
     <AddCartContext.Provider
       value={{
         name: [productName, setProductName],
         qty: [productQuantity, setProductQty],
         itemsData: [cartItems, setCartItems],
+        productInfo: [productsData],
         cartItemData: [getCartData],
         addCartItem: [addItem],
         remvoveCartItem: [removeItem],

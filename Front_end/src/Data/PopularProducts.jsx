@@ -162,3 +162,5 @@ export const popularProducts = [
       "Almonds are a nutritious addition to chocolate, providing essential nutrients like healthy fats, protein, fiber, and various vitamins and minerals. However, it's important to enjoy almond chocolate in moderation, as it can be calorie-dense.",
   },
 ];
+
+

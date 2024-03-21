@@ -2,21 +2,21 @@ import { Button, IconButton, Paper } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { productsData } from "../Data/ProductsData";
 import { AddCartContext } from "../App";
 const Displayproducts = () => {
   const category = useParams();
-  const products = productsData.filter(
-    (product) => product.category == category.product
-  );
-  const { name, qty, addCartItem, addQty, minusQty } =
+
+  const { name, qty, addCartItem, addQty, minusQty, productInfo } =
     useContext(AddCartContext);
   const [productName] = name;
   const [productQuantity] = qty;
   const [addItem] = addCartItem;
   const [increaseQty] = addQty;
   const [decreaseQty] = minusQty;
-
+  const [productsData] = productInfo;
+  const products = productsData.filter(
+    (product) => product.category == category.product
+  );
   const navigate = useNavigate();
   return (
     <div className="productsPage">
