@@ -1,11 +1,24 @@
 import { Paper } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { categories } from "../../Data/CategoriesData";
-import {  useNavigate } from "react-router-dom";
-import "../Categories/Categories.css"
+import { getCategories } from "../../Data/CategoriesData";
+import { useNavigate } from "react-router-dom";
+import "../Categories/Categories.css";
 const Categories = () => {
   const navigate = useNavigate();
+const[categories,setCategories]=useState([])
+const readCategoryData=async()=>{
+try {
+  const data = await getCategories()
+  setCategories(data)
+} catch (error) {
+  console.log(error);
+}
+}
+useEffect(()=>{
+  readCategoryData()
+},[])
+
   return (
     <div className="productCategoriesSection">
       <div className="categoriesTitleSection">

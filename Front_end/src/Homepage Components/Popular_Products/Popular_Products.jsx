@@ -1,7 +1,5 @@
 import { Button, IconButton, Paper } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { motion } from "framer-motion";
 import "../Popular_Products/Popular_Products.css";
