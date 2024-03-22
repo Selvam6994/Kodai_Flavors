@@ -6,30 +6,21 @@ import "../Popular_Products/Popular_Products.css";
 import { AddCartContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
-const Popular_Products = ({popular}) => {
+const Popular_Products = ({ popular }) => {
   const navigate = useNavigate();
   // state management
   const [sliderWidth, setSliderWidth] = useState(0);
-console.log(popular);
-  const {
-    name,
-    qty,
-    addCartItem,
-    addQty,
-    minusQty,
-  } = useContext(AddCartContext);
+  const { name, qty, addCartItem, addQty, minusQty } =
+    useContext(AddCartContext);
   const [productName] = name;
   const [productQuantity] = qty;
   const [addItem] = addCartItem;
   const [increaseQty] = addQty;
   const [decreaseQty] = minusQty;
   let slider = useRef();
-console.log(slider.current);
   useEffect(() => {
-
     setSliderWidth(slider.current.scrollWidth - slider.current.offsetWidth);
   }, []);
-
 
   return (
     <div className="popularProductsPage">

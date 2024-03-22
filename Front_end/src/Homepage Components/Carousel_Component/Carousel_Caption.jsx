@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { carouselContent } from "../../Data/CarouselData";
 import { useMediaQuery } from "@mui/material";
 import { tabWidth } from "../../Media_Query/Tabview";
-
-const Carousel_Caption = ({ index }) => {
+import { getCarouselSlides } from "../../Data/CarouselData";
+const Carousel_Caption = ({ imageIndex, carouselImages }) => {
   const tabView = useMediaQuery(`(${tabWidth})`);
+
   return (
     <div className="captionContainer">
       <motion.div
@@ -15,7 +15,7 @@ const Carousel_Caption = ({ index }) => {
           color: "rgb(255, 255, 255)",
         }}
       >
-        {carouselContent[index].caption}
+        {carouselImages[imageIndex].caption}
       </motion.div>
     </div>
   );
