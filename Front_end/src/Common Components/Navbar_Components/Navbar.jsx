@@ -1,6 +1,7 @@
 import {
   Badge,
   Box,
+  Button,
   IconButton,
   Paper,
   TextField,
@@ -22,6 +23,8 @@ import "../Navbar_Components/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AddCartContext } from "../../App";
+import { motion } from "framer-motion";
+
 const Navbar = () => {
   const tabView = useMediaQuery(`(${tabWidth})`);
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
@@ -56,6 +59,16 @@ const Navbar = () => {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
+
+              <motion.div
+                className="accountButton"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                onClick={()=>{navigate("/user/account")}}
+              >
+                Log in
+              </motion.div>
               <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                 <SearchIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                 <TextField id="input" label="Search" variant="standard" />
@@ -76,6 +89,7 @@ const Navbar = () => {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
+
             <PopupState variant="popover" popupId="demo-popup-menu">
               {(popupState) => (
                 <React.Fragment>

@@ -4,7 +4,7 @@ export const navOptions = [
       link: "/",
     },
     {
-      option: "Product Categories",
+      option: "Products",
       link: "categories",
     },
     {
@@ -14,7 +14,9 @@ export const navOptions = [
     {
       option: "Contact",
       link: "contact",
+      
     },
+  
    
   ];
 
@@ -24,7 +26,7 @@ export const navOptions = [
       link: "/",
     },
     {
-      option: "Product Categories",
+      option: "Products",
       link: "categories",
     },
     {
@@ -34,6 +36,10 @@ export const navOptions = [
     {
       option: "Contact",
       link: "contact",
+    },
+    {
+      option: "Log in",
+      link: "#",
     },
     {
       option: "Search",

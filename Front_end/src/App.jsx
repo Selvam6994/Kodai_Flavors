@@ -8,6 +8,7 @@ import ViewProduct from "./ProductMainPage/ViewProduct";
 import Cart from "./Cart Component/Cart";
 import { createContext, useEffect, useState } from "react";
 import { getProductData } from "./Data/Products";
+import LoginPage from "./User Account/LoginPage";
 
 export const AddCartContext = createContext();
 
@@ -102,6 +103,7 @@ const App = () => {
           element={<ViewProduct />}
         ></Route>
         <Route path="/mycart" element={<Cart />}></Route>
+        <Route path="/user/account" element={<LoginPage />}></Route>
       </Routes>
       <Footer />
     </AddCartContext.Provider>
