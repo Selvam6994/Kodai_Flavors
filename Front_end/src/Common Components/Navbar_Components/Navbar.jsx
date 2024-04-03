@@ -1,7 +1,6 @@
 import {
   Badge,
   Box,
-  Button,
   IconButton,
   Paper,
   TextField,
@@ -18,24 +17,71 @@ import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import MenuIcon from "@mui/icons-material/Menu";
 import { tabWidth } from "../../Media_Query/Tabview";
-import { smallMobileWidth } from "../../Media_Query/Mobileview";
+import { MobileWidth, smallMobileWidth } from "../../Media_Query/Mobileview";
 import "../Navbar_Components/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AddCartContext } from "../../App";
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
+
+export const getUserData = async () => {
+  try {
+    const token = Cookies.get("gAuth");
+    if (token != undefined) {
+      const fetchData = await fetch(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer${token}`,
+          },
+        }
+      );
+      const userData = await fetchData.json();
+      return userData;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const Navbar = () => {
   const tabView = useMediaQuery(`(${tabWidth})`);
+  const mobileView = useMediaQuery(`(${MobileWidth})`);
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
   const navigate = useNavigate();
   const { itemsData, cartItemData } = useContext(AddCartContext);
   const [cartItems] = itemsData;
   const [getCartData] = cartItemData;
 
+  const [user, setUser] = useState([]);
+  const [randomNum, setRandomNum] = useState();
+
+  const cookieData = Cookies.get("gAuth");
+  const genRandomNum = () => {
+    const num = Math.random();
+    setRandomNum(num);
+  };
+
+  const userData = async () => {
+    const data = await getUserData();
+    setUser(data);
+  };
+
+  console.log(user);
   useEffect(() => {
     getCartData();
-  }, []);
+    getUserData();
+  }, [randomNum]);
+
+  if (cookieData != undefined) {
+    if (user.length == 0) {
+      getUserData();
+      userData();
+    }
+  }
+
   return (
     <div className="navBarContainer">
       <Paper
@@ -43,7 +89,9 @@ const Navbar = () => {
         className="navBar"
         sx={{ borderRadius: "0 0 20px 20px" }}
       >
-        <div className="logoContainer">
+        <div
+          className={smallMobileView ? "logoContainer" : "logoContainerMobile"}
+        >
           <img src={pageLogo} alt="Kodai Flavors" />
         </div>
         {tabView ? (
@@ -59,16 +107,55 @@ const Navbar = () => {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
+              {cookieData == undefined ? (
+                <motion.div
+                  className="loginButton"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  onClick={() => {
+                    navigate("/user/login");
+                  }}
+                >
+                  Log in
+                </motion.div>
+              ) : (
+                <PopupState variant="popover" popupId="demo-popup-menu">
+                  {(popupState) => (
+                    <React.Fragment>
+                      <IconButton
+                        className="accountProfileButton"
+                        variant="contained"
+                        {...bindTrigger(popupState)}
+                      >
+                        <img src={user.picture} alt="" />
+                      </IconButton>
+                      <Menu {...bindMenu(popupState)}>
+                        <MenuItem onClick={popupState.close}>
+                          <span
+                            onClick={() => {
+                              Cookies.remove("gAuth");
+                              genRandomNum();
+                            }}
+                          >
+                            Log Out
+                          </span>
+                        </MenuItem>
+                        <MenuItem onClick={popupState.close}>
+                          <span
+                            onClick={() => {
+                              navigate("/user/dashboard");
+                            }}
+                          >
+                            My Account
+                          </span>
+                        </MenuItem>
+                      </Menu>
+                    </React.Fragment>
+                  )}
+                </PopupState>
+              )}
 
-              <motion.div
-                className="accountButton"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                onClick={()=>{navigate("/user/account")}}
-              >
-                Log in
-              </motion.div>
               <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                 <SearchIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                 <TextField id="input" label="Search" variant="standard" />
@@ -78,7 +165,13 @@ const Navbar = () => {
         ) : (
           <div
             className="tabViewMenuContainer"
-            style={smallMobileView ? { gap: "50px" } : { width: "10%" }}
+            style={
+              !mobileView
+                ? { gap: "10px" }
+                : smallMobileView
+                ? { gap: "50px" }
+                : { width: "10%" }
+            }
           >
             <IconButton
               color="primary"
@@ -89,8 +182,49 @@ const Navbar = () => {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-
-            <PopupState variant="popover" popupId="demo-popup-menu">
+            {cookieData == undefined ? (
+              <></>
+            ) : (
+              <PopupState variant="popover" popupId="popup-menu">
+                {(popupState) => (
+                  <React.Fragment>
+                    <IconButton
+                      className={
+                        smallMobileView
+                          ? "accountProfileButton"
+                          : "smallaccountProfileButton"
+                      }
+                      variant="contained"
+                      {...bindTrigger(popupState)}
+                    >
+                      <img src={user.picture} alt="" />
+                    </IconButton>
+                    <Menu {...bindMenu(popupState)}>
+                      <MenuItem onClick={popupState.close}>
+                        <span
+                          onClick={() => {
+                            Cookies.remove("gAuth");
+                            genRandomNum();
+                          }}
+                        >
+                          Log Out
+                        </span>
+                      </MenuItem>
+                      <MenuItem onClick={popupState.close}>
+                        <span
+                          onClick={() => {
+                            navigate("/user/dashboard");
+                          }}
+                        >
+                          My Account
+                        </span>
+                      </MenuItem>
+                    </Menu>
+                  </React.Fragment>
+                )}
+              </PopupState>
+            )}
+            <PopupState variant="popover" popupId="popup-menu">
               {(popupState) => (
                 <React.Fragment>
                   <IconButton variant="contained" {...bindTrigger(popupState)}>
@@ -99,9 +233,24 @@ const Navbar = () => {
                   <Menu {...bindMenu(popupState)}>
                     {tabMenu.map((option, index) => (
                       <MenuItem onClick={popupState.close} key={index}>
-                        {option.option}
+                        <span
+                          onClick={() => {
+                            navigate(`${option.link}`);
+                          }}
+                        >
+                          {option.option}
+                        </span>
                       </MenuItem>
                     ))}
+                    <MenuItem onClick={popupState.close}>
+                      <span
+                        onClick={() => {
+                          navigate("/user/login");
+                        }}
+                      >
+                        Log in
+                      </span>
+                    </MenuItem>
                   </Menu>
                 </React.Fragment>
               )}

@@ -9,6 +9,7 @@ import Cart from "./Cart Component/Cart";
 import { createContext, useEffect, useState } from "react";
 import { getProductData } from "./Data/Products";
 import LoginPage from "./User Account/LoginPage";
+import UserDashboard from "./User Dashboard/UserDashboard";
 
 export const AddCartContext = createContext();
 
@@ -26,15 +27,6 @@ const App = () => {
     setProductsData(data);
   };
 
-  // Get cart item
-  const getCartData = () => {
-    const cartData = [];
-    let keys = Object.keys(localStorage);
-    for (let i = 0; i < keys.length; i++) {
-      cartData.push(JSON.parse(localStorage.getItem(keys[i])));
-      setCartItems([...cartData]);
-    }
-  };
   // Add cart item
   const addItem = (product, productQuantity) => {
     const productQty = {
@@ -74,6 +66,16 @@ const App = () => {
     }
   };
 
+  // Get cart item
+  const getCartData = () => {
+    const cartData = [];
+    let keys = Object.keys(localStorage);
+    for (let i = 0; i < keys.length; i++) {
+      cartData.push(JSON.parse(localStorage.getItem(keys[i])));
+      setCartItems([...cartData]);
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -85,7 +87,6 @@ const App = () => {
         qty: [productQuantity, setProductQty],
         itemsData: [cartItems, setCartItems],
         productInfo: [productsData],
-
         cartItemData: [getCartData],
         addCartItem: [addItem],
         remvoveCartItem: [removeItem],
@@ -103,7 +104,8 @@ const App = () => {
           element={<ViewProduct />}
         ></Route>
         <Route path="/mycart" element={<Cart />}></Route>
-        <Route path="/user/account" element={<LoginPage />}></Route>
+        <Route path="/user/login" element={<LoginPage />}></Route>
+        <Route path="/user/dashboard" element={<UserDashboard/>}></Route>
       </Routes>
       <Footer />
     </AddCartContext.Provider>

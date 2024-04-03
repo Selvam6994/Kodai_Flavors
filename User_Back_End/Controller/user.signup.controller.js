@@ -1,8 +1,8 @@
 import client from "../Database/config.db.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import nodeMailer from "nodemailer";
 import jwt from "jsonwebtoken";
+import { sendOtp } from "../Services/service.nodemailer.js";
 dotenv.config();
 
 const hashOtp = async (otp) => {
@@ -24,26 +24,8 @@ export const createEmail = async (req, res) => {
       res.status(400).json({ message: "Otp already sent to the email." });
     } else {
       const otp = (Math.random() * 100000).toFixed();
-      const transporter = nodeMailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "kodaiflavours@gmail.com",
-          pass: process.env.NODEMAILER_EMAIL_PASSWORD,
-        },
-      });
-      const info = {
-        from: "kodaiflavours@gmail.com",
-        to: email,
-        subject: "Sign-up Kodai Flavours",
-        text: `Hi, ${email}! Your one time password is ${otp} and it expires in a minute. Signup soon!`,
-      };
-      transporter.sendMail(info, (error) => {
-        if (error) {
-          console.log("error", error);
-        } else {
-          console.log("Otp sent successfully.");
-        }
-      });
+  sendOtp(email,otp)
+      
 
       const hashedOtp = await hashOtp(otp);
 
@@ -81,8 +63,8 @@ export const verifyOtp = async (req, res) => {
         { email: email },
         process.env.JWT_SERCRET_KEY.toString()
       );
-     
-      res.status(200).json({ message: "Otp Verified",token:token });
+
+      res.status(200).json({ message: "Otp Verified", token: token });
     } else {
       res.status(400).json({ message: "Invalid Otp" });
     }

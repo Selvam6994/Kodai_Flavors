@@ -1,70 +1,102 @@
 /* Nav Bar Component Properties */
 .navBarContainer {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    z-index: 1;
-  }
-  
-  .navBar {
-    width: 90%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .logoContainer {
-    width: 100px;
-    height: 100px;
-    padding: 0 10px 0 10px;
-  }
-  
-  .logoContainer img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-  }
-  
-  .buttonsContainer {
-    width: 50%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  
-  .navButtons {
-    list-style: none;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .optionsContainer {
-    width: 400px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    
-  }
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+}
 
-  .accountButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    
-  }
-  
-  .tabViewMenuContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 30px 0 30px;
-  }
+.navBar {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logoContainer {
+  width: 100px;
+  height: 100px;
+  padding: 0 10px 0 10px;
+}
+
+.logoContainer img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.logoContainerMobile {
+  width: 80px;
+  height: 80px;
+  padding: 0 10px 0 10px;
+}
+.logoContainerMobile img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.buttonsContainer {
+  width: 50%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.navButtons {
+  list-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.optionsContainer {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.loginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.accountProfileButton {
+  width: 40px;
+  height: 40px;
+}
+.accountProfileButton img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.smallaccountProfileButton {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.smallaccountProfileButton img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.tabViewMenuContainer {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  padding: 0 30px 0 0;
+}
