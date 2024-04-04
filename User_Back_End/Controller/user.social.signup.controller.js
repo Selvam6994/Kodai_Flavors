@@ -1,5 +1,8 @@
 import client from "../Database/config.db.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+dotenv.config();
 export const verifySocialLogin = async (req, res) => {
   const { googleToken } = req.body;
   const fetchData = await fetch(
@@ -16,14 +19,15 @@ export const verifySocialLogin = async (req, res) => {
     .db("Kodai_Flavors_Ecom")
     .collection("User_Data")
     .findOne({ email: userData.email, sub: userData.sub });
-
+    const token = jwt.sign(userData , process.env.JWT_SECRET);
   if (!existingUser) {
     await client
       .db("Kodai_Flavors_Ecom")
       .collection("User_Data")
       .insertOne(userData);
-    res.status(200).send({ message: "User Data added to db" });
+   
+    res.status(200).json(token);
   } else {
-    res.status(200).send({ message: "User verified" });
+    res.status(200).json(token);
   }
 };

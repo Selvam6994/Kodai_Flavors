@@ -24,25 +24,12 @@ import { useEffect } from "react";
 import { AddCartContext } from "../../App";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
-export const getUserData = async () => {
-  try {
-    const token = Cookies.get("gAuth");
-    if (token != undefined) {
-      const fetchData = await fetch(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer${token}`,
-          },
-        }
-      );
-      const userData = await fetchData.json();
-      return userData;
-    }
-  } catch (error) {
-    console.log(error);
+export const getUserData = () => {
+  const userToken = Cookies.get("gToken");
+  if (userToken) {
+    return jwtDecode(Cookies.get("gToken"));
   }
 };
 
@@ -64,12 +51,11 @@ const Navbar = () => {
     setRandomNum(num);
   };
 
-  const userData = async () => {
-    const data = await getUserData();
+  const userData = () => {
+    const data = getUserData();
     setUser(data);
   };
 
-  console.log(user);
   useEffect(() => {
     getCartData();
     getUserData();
@@ -135,6 +121,7 @@ const Navbar = () => {
                           <span
                             onClick={() => {
                               Cookies.remove("gAuth");
+                              localStorage.removeItem("gToken");
                               genRandomNum();
                             }}
                           >
@@ -205,6 +192,7 @@ const Navbar = () => {
                           onClick={() => {
                             Cookies.remove("gAuth");
                             genRandomNum();
+                            localStorage.removeItem("gToken");
                           }}
                         >
                           Log Out

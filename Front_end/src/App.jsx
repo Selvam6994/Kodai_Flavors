@@ -7,7 +7,7 @@ import Displayproducts from "./ProductsCardPage Components/Displayproducts";
 import ViewProduct from "./ProductMainPage/ViewProduct";
 import Cart from "./Cart Component/Cart";
 import { createContext, useEffect, useState } from "react";
-import { getProductData } from "./Data/Products";
+import { getProductData } from "./Data/Get Data/Products";
 import LoginPage from "./User Account/LoginPage";
 import UserDashboard from "./User Dashboard/UserDashboard";
 

@@ -1,7 +1,7 @@
 import { Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getCategories } from "../../Data/CategoriesData";
+import { getCategories } from "../../Data/Get Data/CategoriesData";
 import { useNavigate } from "react-router-dom";
 import "../Categories/Categories.css";
 const Categories = () => {

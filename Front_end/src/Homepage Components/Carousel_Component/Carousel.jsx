@@ -3,7 +3,7 @@ import { useState } from "react";
 import Carousel_Caption from "./Carousel_Caption";
 import "../Carousel_Component/Carousel_Component.css";
 import Carousel_Images from "./Carousel_Images";
-import { getCarouselSlides } from "../../Data/CarouselData";
+import { getCarouselSlides } from "../../Data/Get Data/CarouselData";
 
 const Carousel = () => {
   const [index, setIndex] = useState(0);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "@mui/material";
 import { tabWidth } from "../../Media_Query/Tabview";
-import { getCarouselSlides } from "../../Data/CarouselData";
+import { getCarouselSlides } from "../../Data/Get Data/CarouselData";
 const Carousel_Caption = ({ imageIndex, carouselImages }) => {
   const tabView = useMediaQuery(`(${tabWidth})`);
 

@@ -3,7 +3,7 @@ import Carousel from "./Carousel_Component/Carousel";
 import Popular_Products from "./Popular_Products/Popular_Products";
 import "../Homepage Components/Homepage.css";
 import Categories from "./Categories/Categories";
-import { getPopularProductData } from "../Data/PopularProducts";
+import { getPopularProductData } from "../Data/Get Data/PopularProducts";
 const Homepage = () => {
   const [popularProducts, setPopularProducts] = useState([]);
   const retriveData = async () => {
