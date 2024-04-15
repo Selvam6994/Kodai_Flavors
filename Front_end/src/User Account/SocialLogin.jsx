@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
-import GoogleIcon from "@mui/icons-material/Google";
 import { useNavigate } from "react-router-dom";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { getUserData } from "../Common Components/Navbar_Components/Navbar";
 import { googleSinupData } from "../Data/Post Data/PostGoogleSignupData";
 
 const SocialLogin = () => {
   const navigate = useNavigate();
-
+  const [animation, setAnimation] = useState(false);
   const getGoogleUserdata = async () => {
     const googleUserData = await googleSinupData();
-    const cookieToken = Cookies.get("gAuth")
-    if(cookieToken!=undefined){
+    const cookieToken = Cookies.get("gAuth");
+    if (cookieToken != undefined) {
       Cookies.set("gToken", googleUserData, { expires: 1 });
     }
   };
@@ -32,8 +30,23 @@ const SocialLogin = () => {
   return (
     <div className="socialSignUp">
       <div className="sinupContainer">
-        <IconButton onClick={() => login()}>
-          <GoogleIcon />
+        <IconButton
+          onClick={() => login()}
+          onMouseEnter={() => {
+            setAnimation(true);
+          }}
+          onMouseLeave={() => {
+            setAnimation(false);
+          }}
+        >
+          <i
+            class={
+              animation
+                ? "fa-brands fa-google fa-bounce"
+                : "fa-brands fa-google"
+            }
+            style={{ color: "#ff0000" }}
+          ></i>
         </IconButton>
       </div>
     </div>
