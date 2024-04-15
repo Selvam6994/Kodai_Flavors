@@ -29,7 +29,7 @@ import { jwtDecode } from "jwt-decode";
 export const getUserData = () => {
   const userToken = Cookies.get("gToken");
   if (userToken) {
-    return jwtDecode(Cookies.get("gToken"));
+    return jwtDecode(userToken);
   }
 };
 
