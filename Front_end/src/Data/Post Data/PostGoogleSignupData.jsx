@@ -1,4 +1,7 @@
 import Cookies from "js-cookie";
+// import dotenv from "dotenv";
+
+// dotenv.config();
 
 export const googleSinupData = async () => {
   const token = Cookies.get("gAuth");
@@ -10,7 +13,7 @@ export const googleSinupData = async () => {
         body: JSON.stringify({ googleToken: token }),
       });
       if (userData.status == 200) {
-     return await userData.json()
+        return await userData.json();
       }
     } catch (error) {
       console.log(error);
