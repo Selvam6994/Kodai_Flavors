@@ -20,10 +20,10 @@ const SocialLogin = () => {
   const login = useGoogleLogin({
     onSuccess: (response) => {
       Cookies.set("gAuth", response.access_token, { expires: 1 });
-      navigate("/");
       getUserData();
       googleSinupData();
       getGoogleUserdata();
+      navigate("/");
     },
   });
 
