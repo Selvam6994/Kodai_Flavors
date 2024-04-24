@@ -9,6 +9,7 @@ import { googleSinupData } from "../Data/Post Data/PostGoogleSignupData";
 const SocialLogin = () => {
   const navigate = useNavigate();
   const [animation, setAnimation] = useState(false);
+
   const getGoogleUserdata = async () => {
     const googleUserData = await googleSinupData();
     console.log(googleUserData);
@@ -23,9 +24,8 @@ const SocialLogin = () => {
       Cookies.set("gAuth", response.access_token, { expires: 1 });
       await getGoogleUserdata();
       await googleSinupData();
-       getUserData();
-      
       navigate("/");
+      getUserData();
     },
   });
 
