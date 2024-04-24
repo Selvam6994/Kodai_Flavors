@@ -21,9 +21,10 @@ const SocialLogin = () => {
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       Cookies.set("gAuth", response.access_token, { expires: 1 });
-       getUserData();
       await getGoogleUserdata();
       await googleSinupData();
+       getUserData();
+      
       navigate("/");
     },
   });
