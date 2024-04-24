@@ -7,15 +7,13 @@ import socialSignupRouter from "./Router/user.social.signup.router.js";
 dotenv.config();
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 const port = process.env.PORT;
 
 await client.connect(console.log("connected to DB"));
 
 app.use("/user", signupRouter);
-app.use("/user",socialSignupRouter)
+app.use("/user", socialSignupRouter);
 app.listen(port, () => {
   console.log(`User app started in ${port}`);
 });
-
-app.use(cors());
