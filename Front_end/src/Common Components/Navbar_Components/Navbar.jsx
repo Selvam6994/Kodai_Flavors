@@ -121,8 +121,8 @@ const Navbar = () => {
                           <span
                             onClick={() => {
                               Cookies.remove("gAuth");
-                              localStorage.removeItem("gToken");
                               genRandomNum();
+                              userData();
                             }}
                           >
                             Log Out
@@ -192,7 +192,7 @@ const Navbar = () => {
                           onClick={() => {
                             Cookies.remove("gAuth");
                             genRandomNum();
-                            localStorage.removeItem("gToken");
+                            userData()
                           }}
                         >
                           Log Out
