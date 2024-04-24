@@ -19,8 +19,8 @@ export const verifySocialLogin = async (req, res) => {
     .db("Kodai_Flavors_Ecom")
     .collection("User_Data")
     .findOne({ email: userData.email, sub: userData.sub });
-
-  const token = jwt.sign(userData , process.env.JWT_SECRET);
+  const token = jwt.sign(userData, process.env.JWT_SECRET);
+  console.log(token);
   if (!existingUser) {
     await client
       .db("Kodai_Flavors_Ecom")

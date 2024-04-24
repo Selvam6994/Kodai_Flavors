@@ -11,6 +11,7 @@ const SocialLogin = () => {
   const [animation, setAnimation] = useState(false);
   const getGoogleUserdata = async () => {
     const googleUserData = await googleSinupData();
+    console.log(googleUserData);
     const cookieToken = Cookies.get("gAuth");
     if (cookieToken != undefined) {
       Cookies.set("gToken", googleUserData, { expires: 1 });
@@ -18,11 +19,11 @@ const SocialLogin = () => {
   };
 
   const login = useGoogleLogin({
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       Cookies.set("gAuth", response.access_token, { expires: 1 });
-      getGoogleUserdata();
-      getUserData();
-      googleSinupData();
+       getUserData();
+      await getGoogleUserdata();
+      await googleSinupData();
       navigate("/");
     },
   });
