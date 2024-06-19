@@ -2,7 +2,7 @@ import "./App.css";
 import Footer from "./Common Components/Footer";
 import Navbar from "./Common Components/Navbar_Components/Navbar";
 import Homepage from "./Homepage Components/Homepage";
-import { Route, Routes, json } from "react-router-dom";
+import { Route, Routes, json, useNavigate } from "react-router-dom";
 import Displayproducts from "./ProductsCardPage Components/Displayproducts";
 import ViewProduct from "./ProductMainPage/ViewProduct";
 import Cart from "./Cart Component/Cart";
@@ -12,7 +12,7 @@ import LoginPage from "./User Account/LoginPage";
 import UserDashboard from "./User Dashboard/UserDashboard";
 
 export const AddCartContext = createContext();
-
+export const UserProfileContext = createContext();
 const App = () => {
   const [productsData, setProductsData] = useState([]);
 
@@ -76,6 +76,26 @@ const App = () => {
     }
   };
 
+// render navbar component while login and logout
+const [randomNum, setRandomNum] = useState();
+const genRandomNum = () => {
+   const num = Math.random();
+   setRandomNum(num);
+ };
+
+
+  // get user profile data (user dashboard)
+  // const navigate = useNavigate();
+
+  // const userData = () => {
+  //   if (Cookies.get("gToken") === undefined) {
+  //     navigate("/");
+  //   } else {
+  //     const token = Cookies.get("gToken");
+  //     return jwtDecode(token);
+  //   }
+  // };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -95,19 +115,22 @@ const App = () => {
         minusQty: [decreaseQty],
       }}
     >
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage />}></Route>
-        <Route path="category/:product" element={<Displayproducts />}></Route>
-        <Route
-          path="category/:category/:product"
-          element={<ViewProduct />}
-        ></Route>
-        <Route path="/mycart" element={<Cart />}></Route>
-        <Route path="/user/login" element={<LoginPage />}></Route>
-        <Route path="/user/dashboard" element={<UserDashboard/>}></Route>
-      </Routes>
-      <Footer />
+      <UserProfileContext.Provider value={{ renderNavBar: [randomNum] , genNumber:[genRandomNum]}}>
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Homepage />}></Route>
+          <Route path="category/:product" element={<Displayproducts />}></Route>
+          <Route
+            path="category/:category/:product"
+            element={<ViewProduct />}
+          ></Route>
+          <Route path="/mycart" element={<Cart />}></Route>
+          <Route path="/user/login" element={<LoginPage />}></Route>
+          <Route path="/user/dashboard" element={<UserDashboard />}></Route>
+        </Routes>
+        <Footer />
+      </UserProfileContext.Provider>
     </AddCartContext.Provider>
   );
 };

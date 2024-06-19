@@ -12,11 +12,11 @@ const SocialLogin = () => {
 
   const getGoogleUserdata = async () => {
     const googleUserData = await googleSinupData();
-    console.log(googleUserData);
-    const cookieToken = Cookies.get("gAuth");
-    if (cookieToken != undefined) {
-      Cookies.set("gToken", googleUserData, { expires: 1 });
-    }
+    Cookies.set("gToken", googleUserData, { expires: 1 });
+    // const cookieToken = Cookies.get("gAuth");
+    // if (cookieToken != undefined) {
+    //   Cookies.set("gToken", googleUserData, { expires: 1 });
+    // }
   };
 
   const login = useGoogleLogin({

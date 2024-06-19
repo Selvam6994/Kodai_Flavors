@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 export const verifySocialLogin = async (req, res) => {
   const { googleToken } = req.body;
-  const fetchData = await fetch(
+  const fetchUserData = await fetch(
     "https://www.googleapis.com/oauth2/v3/userinfo",
     {
       method: "GET",
@@ -14,13 +14,12 @@ export const verifySocialLogin = async (req, res) => {
       },
     }
   );
-  const userData = await fetchData.json();
+  const userData = await fetchUserData.json();
   const existingUser = await client
     .db("Kodai_Flavors_Ecom")
     .collection("User_Data")
     .findOne({ email: userData.email, sub: userData.sub });
-  const token = jwt.sign(userData, process.env.JWT_SECRET);
-  console.log(token);
+  const token = jwt.sign(existingUser, process.env.JWT_SECRET);
   if (!existingUser) {
     await client
       .db("Kodai_Flavors_Ecom")

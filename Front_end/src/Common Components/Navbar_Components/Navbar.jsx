@@ -21,7 +21,7 @@ import { MobileWidth, smallMobileWidth } from "../../Media_Query/Mobileview";
 import "../Navbar_Components/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { AddCartContext } from "../../App";
+import { AddCartContext, UserProfileContext } from "../../App";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
@@ -39,34 +39,17 @@ const Navbar = () => {
   const smallMobileView = useMediaQuery(`(${smallMobileWidth})`);
   const navigate = useNavigate();
   const { itemsData, cartItemData } = useContext(AddCartContext);
+  const { renderNavBar } = useContext(UserProfileContext);
   const [cartItems] = itemsData;
   const [getCartData] = cartItemData;
-
-  const [user, setUser] = useState([]);
-  const [randomNum, setRandomNum] = useState();
+  const [randomNum] = renderNavBar;
 
   const cookieData = Cookies.get("gAuth");
-  const genRandomNum = () => {
-    const num = Math.random();
-    setRandomNum(num);
-  };
-
-  const userData = () => {
-    const data = getUserData();
-    setUser(data);
-  };
 
   useEffect(() => {
     getCartData();
     getUserData();
   }, [randomNum]);
-
-  if (cookieData != undefined) {
-    if (user.length == 0) {
-      getUserData();
-      userData();
-    }
-  }
 
   return (
     <div className="navBarContainer">
@@ -93,54 +76,65 @@ const Navbar = () => {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-              {cookieData == undefined ? (
+              {!cookieData ? (
                 <motion.div
                   className="loginButton"
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   onClick={() => {
+                    getUserData();
                     navigate("/user/login");
                   }}
                 >
                   Log in
                 </motion.div>
               ) : (
-                <PopupState variant="popover" popupId="demo-popup-menu">
-                  {(popupState) => (
-                    <React.Fragment>
-                      <IconButton
-                        className="accountProfileButton"
-                        variant="contained"
-                        {...bindTrigger(popupState)}
-                      >
-                        <img src={user.picture} alt="" />
-                      </IconButton>
-                      <Menu {...bindMenu(popupState)}>
-                        <MenuItem onClick={popupState.close}>
-                          <span
-                            onClick={() => {
-                              Cookies.remove("gAuth");
-                              genRandomNum();
-                              userData();
-                            }}
-                          >
-                            Log Out
-                          </span>
-                        </MenuItem>
-                        <MenuItem onClick={popupState.close}>
-                          <span
-                            onClick={() => {
-                              navigate("/user/dashboard");
-                            }}
-                          >
-                            My Account
-                          </span>
-                        </MenuItem>
-                      </Menu>
-                    </React.Fragment>
-                  )}
-                </PopupState>
+                <IconButton
+                  className="accountProfileButton"
+                  onClick={() => {
+                    navigate("/user/dashboard");
+                  }}
+                >
+                  {" "}
+                  <img src={getUserData().picture} alt="" />
+                </IconButton>
+                // <PopupState variant="popover" popupId="demo-popup-menu">
+                //   {(popupState) => (
+                //     <React.Fragment>
+                //       <IconButton
+                //         className="accountProfileButton"
+                //         variant="contained"
+                //         {...bindTrigger(popupState)}
+                //       >
+                //         <img src={getUserData().picture} alt="" />
+                //       </IconButton>
+                //       <Menu {...bindMenu(popupState)}>
+                //         <MenuItem onClick={popupState.close}>
+                //           <span
+                //             onClick={() => {
+                //               Cookies.remove("gAuth");
+                //               Cookies.remove("gToken");
+                //               getUserData();
+                //               genRandomNum();
+                //             }}
+                //           >
+                //             Log Out
+                //           </span>
+                //         </MenuItem>
+                //         <MenuItem onClick={popupState.close}>
+                //           <span
+                //             onClick={() => {
+                //               navigate("/user/dashboard");
+                //             }}
+                //           >
+                //             My Account
+                //           </span>
+                //         </MenuItem>
+                //       </Menu>
+                //     </React.Fragment>
+                //   )}
+                // </PopupState>
               )}
 
               <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -169,48 +163,58 @@ const Navbar = () => {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-            {cookieData == undefined ? (
+            {!cookieData ? (
               <></>
             ) : (
-              <PopupState variant="popover" popupId="popup-menu">
-                {(popupState) => (
-                  <React.Fragment>
-                    <IconButton
-                      className={
-                        smallMobileView
-                          ? "accountProfileButton"
-                          : "smallaccountProfileButton"
-                      }
-                      variant="contained"
-                      {...bindTrigger(popupState)}
-                    >
-                      <img src={user.picture} alt="" />
-                    </IconButton>
-                    <Menu {...bindMenu(popupState)}>
-                      <MenuItem onClick={popupState.close}>
-                        <span
-                          onClick={() => {
-                            Cookies.remove("gAuth");
-                            genRandomNum();
-                            userData()
-                          }}
-                        >
-                          Log Out
-                        </span>
-                      </MenuItem>
-                      <MenuItem onClick={popupState.close}>
-                        <span
-                          onClick={() => {
-                            navigate("/user/dashboard");
-                          }}
-                        >
-                          My Account
-                        </span>
-                      </MenuItem>
-                    </Menu>
-                  </React.Fragment>
-                )}
-              </PopupState>
+              <IconButton
+                className="accountProfileButton"
+                onClick={() => {
+                  navigate("/user/dashboard");
+                }}
+              >
+                {" "}
+                <img src={getUserData().picture} alt="" />
+              </IconButton>
+              // <PopupState variant="popover" popupId="popup-menu">
+              //   {(popupState) => (
+              //     <React.Fragment>
+              //       <IconButton
+              //         className={
+              //           smallMobileView
+              //             ? "accountProfileButton"
+              //             : "smallaccountProfileButton"
+              //         }
+              //         variant="contained"
+              //         {...bindTrigger(popupState)}
+              //       >
+              //         <img src={getUserData().picture} alt="" />
+              //       </IconButton>
+              //       <Menu {...bindMenu(popupState)}>
+              //         <MenuItem onClick={popupState.close}>
+              //           <span
+              //             onClick={() => {
+              //               Cookies.remove("gAuth");
+              //               Cookies.remove("gToken");
+              //               getUserData();
+              //               genRandomNum();
+              //             }}
+              //           >
+              //             Log Out
+              //           </span>
+              //         </MenuItem>
+              //         <MenuItem onClick={popupState.close}>
+              //           <span
+              //             onClick={() => {
+              //               navigate("/user/dashboard");
+              //             }}
+              //           >
+              //             My Account
+              //           </span>
+              //         </MenuItem>
+              //       </Menu>
+              //     </React.Fragment>
+              //   )}
+              // </PopupState>
             )}
             <PopupState variant="popover" popupId="popup-menu">
               {(popupState) => (

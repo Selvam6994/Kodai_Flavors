@@ -10,7 +10,7 @@ export const googleSinupData = async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ googleToken: token }),
       });
-      if (userData.status == 200) {
+      if (userData.status === 200) {
         return await userData.json();
       }
     } catch (error) {

@@ -4,7 +4,8 @@ import Carousel_Caption from "./Carousel_Caption";
 import "../Carousel_Component/Carousel_Component.css";
 import Carousel_Images from "./Carousel_Images";
 import { getCarouselSlides } from "../../Data/Get Data/CarouselData";
-
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 const Carousel = () => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -48,7 +49,9 @@ const Carousel = () => {
           imageDirection={direction}
         />
       ) : (
-        <></>
+        <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
+          <CircularProgress color="success" />
+        </Stack>
       )}
       {carouselData.length > 0 ? (
         <Carousel_Caption imageIndex={index} carouselImages={carouselData} />
