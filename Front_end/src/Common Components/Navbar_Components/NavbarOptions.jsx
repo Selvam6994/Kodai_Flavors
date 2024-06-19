@@ -5,15 +5,15 @@ export const navOptions = [
     },
     {
       option: "Products",
-      link: "categories",
+      link: "",
     },
     {
       option: "About Us",
-      link: "about",
+      link: "",
     },
     {
       option: "Contact",
-      link: "contact",
+      link: "",
       
     },
   
@@ -27,15 +27,15 @@ export const navOptions = [
     },
     {
       option: "Products",
-      link: "categories",
+      link: "",
     },
     {
       option: "About Us",
-      link: "about",
+      link: "",
     },
     {
       option: "Contact",
-      link: "contact",
+      link: "",
     },
   
     {
